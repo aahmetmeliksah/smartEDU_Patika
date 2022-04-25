@@ -4,7 +4,11 @@ const app = express();
 // import router
 const router1 = require("./routes/Routes");
 
+// template engine
+app.set("view engine", "ejs");
+
 // Middlewares
+app.use(express.static("public"));
 app.use("/", router1);
 
 // Listen to port
