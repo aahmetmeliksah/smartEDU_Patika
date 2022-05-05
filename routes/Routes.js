@@ -1,16 +1,11 @@
 const express = require("express");
 const router1 = express.Router();
 
-router1.get("/", (req, res) => {
-  res.status(200).render("index", {
-    page_name: "index",
-  });
-});
+// controllers
+const { indexPage, aboutPage } = require("../controllers/pageController");
 
-router1.get("/about", (req, res) => {
-  res.status(200).render("about", {
-    page_name: "about",
-  });
-});
+router1.get("/", indexPage);
+
+router1.get("/about", aboutPage);
 
 module.exports = router1;
