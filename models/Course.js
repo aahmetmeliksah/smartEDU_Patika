@@ -11,6 +11,8 @@ const courseSchema = new Schema({
   description: {
     type: String,
     required: true,
+    unique: true,
+    trim: true,
   },
 
   createdAt: {
