@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 // import router
 const pageRoute = require("./routes/pageRoute");
@@ -21,6 +22,9 @@ mongoose
 
 // Middlewares
 app.use(express.static("public"));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 // routes
 app.use("/", pageRoute);
 app.use("/courses", courseRoute);
