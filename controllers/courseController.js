@@ -37,11 +37,11 @@ const getAllCourses = async (req, res) => {
 // get a course
 const getCourse = async (req, res) => {
   try {
-    const course = await Course.findById({ _id: req.params.id });
+    const course = await Course.findOne({ slug: req.params.slug });
 
-    res.status(200).json({
-      status: "success",
+    res.status(200).render("course", {
       course,
+      page_name: "courses",
     });
   } catch (error) {
     res.status(400).json({

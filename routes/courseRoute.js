@@ -11,6 +11,6 @@ const {
 // routes
 router.route("/").post(createCourse); // add a course
 router.route("/").get(getAllCourses); // get all courses
-router.route("/:id").get(getCourse); // get a course
+router.route("/:slug").get(getCourse); // get a course
 
 module.exports = router;
