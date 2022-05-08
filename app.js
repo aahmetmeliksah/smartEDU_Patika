@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 // import router
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
+const categoryRoute = require("./routes/categoryRoute");
 
 // template engine
 app.set("view engine", "ejs");
@@ -22,12 +23,14 @@ mongoose
 
 // Middlewares
 app.use(express.static("public"));
+// Must use these two middlewares for POST requests
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // routes
 app.use("/", pageRoute);
 app.use("/courses", courseRoute);
+app.use("/categories", categoryRoute);
 
 // Listen to port
 const PORT = 5555;
