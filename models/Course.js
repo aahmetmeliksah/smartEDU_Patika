@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const slugify = require("slugify");
 
-const courseSchema = new Schema({
+const CourseSchema = new Schema({
   name: {
     type: String,
     unique: true,
@@ -28,7 +28,7 @@ const courseSchema = new Schema({
 });
 
 // pre method makes sure the code runs before the document is created
-courseSchema.pre("validate", function (next) {
+CourseSchema.pre("validate", function (next) {
   this.slug = slugify(this.name, {
     lower: true,
     strict: true,
@@ -36,6 +36,6 @@ courseSchema.pre("validate", function (next) {
   next();
 });
 
-const Course = mongoose.model("Course", courseSchema);
+const Course = mongoose.model("Course", CourseSchema);
 
 module.exports = Course;
