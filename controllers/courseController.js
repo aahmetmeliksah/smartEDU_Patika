@@ -1,4 +1,5 @@
 const Course = require("../models/Course");
+const Category = require("../models/Category");
 
 // add a course
 const createCourse = async (req, res) => {
@@ -20,10 +21,22 @@ const createCourse = async (req, res) => {
 // get all courses
 const getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find();
+    // get category slug from the URL
+    const categorySlug = req.query.categories;
+    const category = await Category.findOne({ slug: categorySlug });
+
+    let filter = {};
+
+    if (category) {
+      filter = { category: category._id };
+    }
+
+    const courses = await Course.find(filter);
+    const categories = await Category.find();
 
     res.status(200).render("courses", {
       courses,
+      categories,
       page_name: "courses",
     });
   } catch (error) {

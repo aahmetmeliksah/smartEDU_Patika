@@ -25,6 +25,11 @@ const CourseSchema = new Schema({
     type: String,
     unique: true,
   },
+
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+  },
 });
 
 // pre method makes sure the code runs before the document is created
