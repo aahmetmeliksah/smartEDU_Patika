@@ -16,4 +16,10 @@ const registerPage = (req, res) => {
   });
 };
 
-module.exports = { indexPage, aboutPage, registerPage };
+const loginPage = (req, res) => {
+  res.status(200).render("login", {
+    page_name: "login",
+  });
+};
+
+module.exports = { indexPage, aboutPage, registerPage, loginPage };
