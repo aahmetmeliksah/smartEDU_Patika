@@ -10,4 +10,10 @@ const aboutPage = (req, res) => {
   });
 };
 
-module.exports = { indexPage, aboutPage };
+const registerPage = (req, res) => {
+  res.status(200).render("register", {
+    page_name: "register",
+  });
+};
+
+module.exports = { indexPage, aboutPage, registerPage };
