@@ -38,7 +38,7 @@ CourseSchema.pre("validate", function (next) {
     lower: true,
     strict: true,
   });
-  next();
+  next(); // this is a middleware, so if there's no next(), request will get stuck here
 });
 
 const Course = mongoose.model("Course", CourseSchema);
