@@ -1,9 +1,9 @@
 const express = require("express");
-const app = express();
-
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const session = require("express-session");
 
+const bodyParser = require("body-parser");
+const app = express();
 // import router
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
@@ -22,13 +22,28 @@ mongoose
   .then(() => console.log(`DB connected`))
   .catch((err) => console.log(err));
 
+// global variables
+global.userIN = null;
+
 // Middlewares
 app.use(express.static("public"));
 // Must use these two middlewares for POST requests
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(
+  session({
+    secret: "my_keyboard_cat",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // routes
+app.use("*", (req, res, next) => {
+  userIN = req.session.userID;
+  next();
+});
+
 app.use("/", pageRoute);
 app.use("/courses", courseRoute);
 app.use("/categories", categoryRoute);
