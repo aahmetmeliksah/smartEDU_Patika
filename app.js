@@ -1,10 +1,13 @@
+"use strict";
+
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const session = require("express-session");
 
-const bodyParser = require("body-parser");
 const app = express();
-// import router
+
+// Routes
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
 const categoryRoute = require("./routes/categoryRoute");
