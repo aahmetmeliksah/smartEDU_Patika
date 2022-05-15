@@ -29,8 +29,6 @@ const loginUser = async (req, res) => {
     if (user) {
       bcrypt.compare(password, user.password, (err, same) => {
         if (same) {
-          // if password is correct
-          // create a new session
           req.session.userID = user._id;
           res.status(200).redirect("/");
         }

@@ -21,9 +21,8 @@ const createCourse = async (req, res) => {
 // get all courses
 const getAllCourses = async (req, res) => {
   try {
-    // get category slug from the URL
-    const categorySlug = req.query.categories;
-    const category = await Category.findOne({ slug: categorySlug });
+    // get category slug from the URL by using req.query.categories
+    const category = await Category.findOne({ slug: req.query.categories });
 
     let filter = {};
 
