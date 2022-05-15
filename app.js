@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(
     secret: "my_keyboard_cat",
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: "mongodb://localhost/smartedu-db" }),
   })
 );
 
