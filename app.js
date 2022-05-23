@@ -27,6 +27,7 @@ mongoose
   .catch((err) => console.log(err));
 
 // global variables
+/* I created this variable and assigned null because it will take user's ID once the user logs in, by doing this, we will be able show/hide certain things to users as we wish */
 global.userIN = null;
 
 // Middlewares
@@ -44,11 +45,11 @@ app.use(
 );
 
 // routes
+/* We assign req.session.userID to userIN global variable in any path. We *must* use next(), otherwise, req will be stuck in this middleware and won't move on to the next one */
 app.use("*", (req, res, next) => {
   userIN = req.session.userID;
   next();
 });
-
 app.use("/", pageRoute);
 app.use("/courses", courseRoute);
 app.use("/categories", categoryRoute);

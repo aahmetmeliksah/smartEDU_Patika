@@ -6,10 +6,7 @@ const createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
 
-    res.status(201).json({
-      status: "success",
-      user,
-    });
+    res.status(201).redirect("/login");
   } catch (error) {
     res.status(400).json({
       status: "fail",
@@ -29,8 +26,9 @@ const loginUser = async (req, res) => {
     if (user) {
       bcrypt.compare(password, user.password, (err, same) => {
         if (same) {
+          /* we created a new variable in req.session object and assigned its value as user._id */
           req.session.userID = user._id;
-          res.status(200).redirect("/");
+          res.status(200).redirect("/users/dashboard");
         }
       });
     }
@@ -49,4 +47,20 @@ const logoutUser = async (req, res) => {
   });
 };
 
-module.exports = { createUser, loginUser, logoutUser };
+const dashboardPage = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.session.userID });
+
+    res.status(200).render("dashboard", {
+      page_name: "dashboard",
+      user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
+
+module.exports = { createUser, loginUser, logoutUser, dashboardPage };
