@@ -8,8 +8,11 @@ const {
   getCourse,
 } = require("../controllers/courseController");
 
+// middlewares
+const roleMiddleware = require("../middlewares/roleMiddleware");
+
 // routes
-router.route("/").post(createCourse); // add a course
+router.route("/").post(roleMiddleware(["admin", "teacher"]), createCourse); // add a course
 router.route("/").get(getAllCourses); // get all courses
 router.route("/:slug").get(getCourse); // get a course
 
