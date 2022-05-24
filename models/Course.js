@@ -30,6 +30,11 @@ const CourseSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
   },
+
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 // pre method makes sure the code runs before the document is created
