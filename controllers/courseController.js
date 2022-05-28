@@ -1,5 +1,6 @@
 const Course = require("../models/Course");
 const Category = require("../models/Category");
+const User = require("../models/User");
 
 // add a course
 const createCourse = async (req, res) => {
@@ -67,8 +68,24 @@ const getCourse = async (req, res) => {
   }
 };
 
+const enrollCourse = async (req, res) => {
+  try {
+    const user = await User.findById(req.session.userID)
+    await user.courses.push(req.body.course_id);
+    await user.save();
+
+    res.status(200).redirect("/users/dashboard");
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error,
+    });
+  }
+};
+
 module.exports = {
   createCourse,
   getAllCourses,
   getCourse,
+  enrollCourse,
 };
