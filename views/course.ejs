@@ -18,7 +18,9 @@
           <div class="image-blog">
             <img src="/images/blog_single.jpg" alt="" class="img-fluid" />
           </div>
+
           <div class="post-content">
+            <% if (user && !(user.courses.includes(course._id))) { %>
             <div class="post-date">
               <form action="/courses/enroll" method="POST">
                 <input
@@ -31,6 +33,7 @@
                 </button>
               </form>
             </div>
+            <% } %>
             <div class="meta-info-blog">
               <span
                 ><i class="fa fa-calendar"></i> <a href="#">May 11, 2015</a>

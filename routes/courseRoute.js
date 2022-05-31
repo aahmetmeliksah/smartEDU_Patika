@@ -7,6 +7,7 @@ const {
   getAllCourses,
   getCourse,
   enrollCourse,
+  dropCourse,
 } = require("../controllers/courseController");
 
 // middlewares
@@ -17,5 +18,6 @@ router.route("/").post(roleMiddleware(["admin", "teacher"]), createCourse); // a
 router.route("/").get(getAllCourses); // get all courses
 router.route("/:slug").get(getCourse); // get a course
 router.route("/enroll").post(enrollCourse); // enroll course
+router.route("/drop-course").post(dropCourse); // drop course
 
 module.exports = router;

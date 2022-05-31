@@ -40,18 +40,30 @@
       <div class="col-lg-6 col-md-6 col-12">
         <div class="course-item mb-5">
           <div class="image-blog">
-            <img src="images/blog_1.jpg" alt="" class="img-fluid" />
+            <img src="/images/blog_1.jpg" alt="" class="img-fluid" />
           </div>
           <div class="course-br">
-            <div class="course-title">
+            <div class="course-title" style="height: 4rem">
               <h2>
-                <a href="course-single.html" title=""
+                <a href="/courses/<%= user.courses[i].slug %>" title=""
                   ><%= user.courses[i].name %></a
                 >
               </h2>
             </div>
             <div class="course-desc">
-              <p><%= user.courses[i].description %></p>
+              <p>
+                <%= user.courses[i].description.substring(0, 100) + "..." %>
+              </p>
+              <form action="/courses/drop-course" method="POST">
+                <input
+                  type="hidden"
+                  value="<%= user.courses[i]._id %>"
+                  name="course_id"
+                />
+                <button class="btn btn-lg btn-danger text-white">
+                  <span>DROP COURSE</span>
+                </button>
+              </form>
             </div>
           </div>
         </div>
